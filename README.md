@@ -14,4 +14,8 @@ Part Two: 729
 --- Day 3: Toboggan Trajectory ---
 Part One: 223
 Part Two: 3517401300
+
+--- Day 4: Passport Processing ---
+Part One: 190
+Part Two: 121
 ```
