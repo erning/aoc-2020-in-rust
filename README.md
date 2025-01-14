@@ -30,4 +30,8 @@ Part Two: 3354
 --- Day 7: Handy Haversacks ---
 Part One: 119
 Part Two: 155802
+
+--- Day 8: Handheld Halting ---
+Part One: 1331
+Part Two: 1121
 ```
