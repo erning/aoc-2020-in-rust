@@ -34,4 +34,8 @@ Part Two: 155802
 --- Day 8: Handheld Halting ---
 Part One: 1331
 Part Two: 1121
+
+--- Day 9: Encoding Error ---
+Part One: 507622668
+Part Two: 76688505
 ```
