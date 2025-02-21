@@ -25,7 +25,7 @@ fn find_invalid(nums: &[u64], len: usize) -> u64 {
 }
 
 fn find_invalid_sum(nums: &[u64], len: usize) -> u64 {
-    let invalid = find_invalid(&nums, len);
+    let invalid = find_invalid(nums, len);
     let mut a = 0;
     let mut b = 1;
     let mut sum = nums[a] + nums[b];
