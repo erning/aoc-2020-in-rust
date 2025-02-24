@@ -38,4 +38,12 @@ Part Two: 1121
 --- Day 9: Encoding Error ---
 Part One: 507622668
 Part Two: 76688505
+
+--- Day 10: Adapter Array ---
+Part One: 1856
+Part Two: 2314037239808
+
+--- Day 11: Seating System ---
+Part One: 2263
+Part Two: 2002
 ```
