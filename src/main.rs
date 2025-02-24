@@ -26,6 +26,7 @@ fn main() {
         puzzle!(day08, "Handheld Halting"),
         puzzle!(day09, "Encoding Error"),
         puzzle!(day10, "Adapter Array"),
+        puzzle!(day11, "Seating System"),
     ];
 
     let filename = match env::args().find(|a| a == "--example") {
