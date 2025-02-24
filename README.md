@@ -46,4 +46,8 @@ Part Two: 2314037239808
 --- Day 11: Seating System ---
 Part One: 2263
 Part Two: 2002
+
+--- Day 12: Rain Risk ---
+Part One: 1007
+Part Two: 41212
 ```
