@@ -28,33 +28,54 @@ fn adjacent_occupied(seats: &[Vec<char>], x: i8, y: i8) -> usize {
         .count()
 }
 
-fn take_seats(seats: &[Vec<char>]) -> Vec<Vec<char>> {
-    let mut new_seats = seats.to_vec();
-    new_seats.iter_mut().enumerate().for_each(|(y, row)| {
+fn direction_occupied(seats: &[Vec<char>], x: i8, y: i8) -> usize {
+    let h = seats.len() as i8;
+    let w = seats[0].len() as i8;
+    DIRS.iter()
+        .map(|(dx, dy)| {
+            let (mut x, mut y) = (x, y);
+            loop {
+                x += dx;
+                y += dy;
+                if x < 0 || x >= w || y < 0 || y >= h {
+                    break false;
+                }
+                match seats[y as usize][x as usize] {
+                    '#' => break true,
+                    'L' => break false,
+                    _ => continue,
+                }
+            }
+        })
+        .filter(|occupied| *occupied)
+        .count()
+}
+
+fn take_seats(
+    seats: &mut Vec<Vec<char>>,
+    threshold: usize,
+    occupied: fn(&[Vec<char>], i8, i8) -> usize,
+) -> bool {
+    let origin = seats.clone();
+    seats.iter_mut().enumerate().for_each(|(y, row)| {
         row.iter_mut().enumerate().for_each(|(x, seat)| {
             match *seat {
-                'L' if adjacent_occupied(seats, x as i8, y as i8) == 0 => {
+                'L' if occupied(&origin, x as i8, y as i8) == 0 => {
                     *seat = '#';
                 }
-                '#' if adjacent_occupied(seats, x as i8, y as i8) >= 4 => {
+                '#' if occupied(&origin, x as i8, y as i8) >= threshold => {
                     *seat = 'L';
                 }
                 _ => {}
             };
         })
     });
-    new_seats
+    seats != &origin
 }
 
 pub fn part_one(input: &str) -> usize {
     let mut seats = parse_input(input);
-    loop {
-        let new_seats = take_seats(&seats);
-        if new_seats == seats {
-            break;
-        }
-        seats = new_seats;
-    }
+    while take_seats(&mut seats, 4, adjacent_occupied) {}
     seats
         .iter()
         .map(|row| row.iter().filter(|&&c| c == '#').count())
@@ -62,7 +83,12 @@ pub fn part_one(input: &str) -> usize {
 }
 
 pub fn part_two(input: &str) -> usize {
-    0
+    let mut seats = parse_input(input);
+    while take_seats(&mut seats, 5, direction_occupied) {}
+    seats
+        .iter()
+        .map(|row| row.iter().filter(|&&c| c == '#').count())
+        .sum()
 }
 
 #[cfg(test)]
