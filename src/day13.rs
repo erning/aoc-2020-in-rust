@@ -27,7 +27,20 @@ pub fn part_one(input: &str) -> usize {
 }
 
 pub fn part_two(input: &str) -> usize {
-    0
+    let (_, bus_ids) = parse_input(input);
+
+    let mut timestamp = 0;
+    let mut step = 1;
+    for (i, id) in bus_ids.iter().enumerate() {
+        if *id == 0 {
+            continue;
+        }
+        while (timestamp + i) % *id != 0 {
+            timestamp += step;
+        }
+        step *= *id;
+    }
+    timestamp
 }
 
 #[cfg(test)]
@@ -39,6 +52,6 @@ mod tests {
     fn example() {
         let input = read_example(13);
         assert_eq!(part_one(&input), 295);
-        assert_eq!(part_two(&input), 0);
+        assert_eq!(part_two(&input), 1068781);
     }
 }
