@@ -54,4 +54,13 @@ mod tests {
         assert_eq!(part_one(&input), 295);
         assert_eq!(part_two(&input), 1068781);
     }
+
+    #[test]
+    fn example_others() {
+        assert_eq!(part_two("939\n17,x,13,19"), 3417);
+        assert_eq!(part_two("939\n67,7,59,61"), 754018);
+        assert_eq!(part_two("939\n67,x,7,59,61"), 779210);
+        assert_eq!(part_two("939\n67,7,x,59,61"), 1261476);
+        assert_eq!(part_two("939\n1789,37,47,1889"), 1202161486);
+    }
 }
