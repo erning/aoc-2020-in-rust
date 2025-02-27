@@ -1,5 +1,3 @@
-use std::collections::HashMap;
-
 fn parse_input(input: &str) -> Vec<usize> {
     input
         .trim()
@@ -10,20 +8,23 @@ fn parse_input(input: &str) -> Vec<usize> {
 
 fn target_number(numbers: Vec<usize>, target: usize) -> usize {
     let n = numbers.len();
-    let mut visited = numbers
-        .iter()
-        .take(n - 1)
-        .enumerate()
-        .map(|(i, &num)| (num, vec![i + 1]))
-        .collect::<HashMap<_, _>>();
+    // Use a Vec instead of HashMap for better performance
+    // Since we're dealing with the last spoken number -> (turn last spoken, current turn)
+    let mut visited = vec![None; target];
+
+    // Initialize with starting numbers
+    for (i, &num) in numbers.iter().take(n - 1).enumerate() {
+        visited[num] = Some((0, i + 1));
+    }
+
     let mut last = numbers[n - 1];
     for i in numbers.len()..target {
-        if let Some(prev) = visited.get_mut(&last) {
-            let j = *prev.last().unwrap();
-            *prev = vec![j, i];
+        if let Some(prev) = visited.get_mut(last).and_then(|v| v.as_mut()) {
+            let j = prev.1;
+            *prev = (j, i);
             last = i - j;
         } else {
-            visited.insert(last, vec![i]);
+            visited[last] = Some((0, i));
             last = 0;
         }
     }
