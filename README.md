@@ -50,4 +50,16 @@ Part Two: 2002
 --- Day 12: Rain Risk ---
 Part One: 1007
 Part Two: 41212
+
+--- Day 13: Shuttle Search ---
+Part One: 1835
+Part Two: 247086664214628
+
+--- Day 14: Docking Data ---
+Part One: 7477696999511
+Part Two: 3687727854171
+
+--- Day 15: Rambunctious Recitation ---
+Part One: 1111
+Part Two: 48568
 ```
