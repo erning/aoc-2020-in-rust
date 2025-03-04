@@ -62,4 +62,8 @@ Part Two: 3687727854171
 --- Day 15: Rambunctious Recitation ---
 Part One: 1111
 Part Two: 48568
+
+--- Day 16: Ticket Translation ---
+Part One: 25916
+Part Two: 2564529489989
 ```
