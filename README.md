@@ -66,4 +66,8 @@ Part Two: 48568
 --- Day 16: Ticket Translation ---
 Part One: 25916
 Part Two: 2564529489989
+
+--- Day 17: Conway Cubes ---
+Part One: 237
+Part Two: 2448
 ```
