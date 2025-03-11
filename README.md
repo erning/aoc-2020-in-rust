@@ -70,4 +70,8 @@ Part Two: 2564529489989
 --- Day 17: Conway Cubes ---
 Part One: 237
 Part Two: 2448
+
+--- Day 18: Operation Order ---
+Part One: 86311597203806
+Part Two: 276894767062189
 ```
