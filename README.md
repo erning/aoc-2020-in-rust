@@ -1,7 +1,7 @@
 # aoc-2020-in-rust
 
 ```text
-$ cargo run --release -- --time
+$ cargo run --release --
 
 --- Day 1: Historian Hysteria ---
 Part One: 877971
@@ -74,4 +74,32 @@ Part Two: 2448
 --- Day 18: Operation Order ---
 Part One: 86311597203806
 Part Two: 276894767062189
+
+--- Day 19: Monster Messages ---
+Part One: 136
+Part Two: 256
+
+--- Day 20: Jurassic Jigsaw ---
+Part One: 12519494280967
+Part Two: 2442
+
+--- Day 21: Allergen Assessment ---
+Part One: 2485
+Part Two: bqkndvb,zmb,bmrmhm,snhrpv,vflms,bqtvr,qzkjrtl,rkkrx
+
+--- Day 22: Crab Combat ---
+Part One: 33473
+Part Two: 31793
+
+--- Day 23: Crab Cups ---
+Part One: 89573246
+Part Two: 2029056128
+
+--- Day 24: Lobby Layout ---
+Part One: 289
+Part Two: 3551
+
+--- Day 25: Combo Breaker ---
+Part One: 8740494
+Part Two: Done
 ```

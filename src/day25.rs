@@ -46,8 +46,8 @@ pub fn part_one(input: &str) -> u64 {
 }
 
 /// Part 2: Not applicable for Day 25 (final day traditionally has only one part)
-pub fn part_two(_input: &str) -> u64 {
-    0 // Day 25 typically only has Part 1
+pub fn part_two(_input: &str) -> String {
+    "Done".to_string() // Day 25 typically only has Part 1
 }
 
 #[cfg(test)]

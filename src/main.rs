@@ -66,7 +66,14 @@ fn main() {
         let t0 = SystemTime::now();
         println!("Part One: {}", part1(input));
         let t1 = SystemTime::now();
-        println!("Part Two: {}", part2(input));
+        if filename == "example" && day == 14 {
+            // example of day 14 part two has different input
+            let input = aoc::read_as_string(day as u8, "example-2");
+            let input = input.as_str();
+            println!("Part Two: {}", part2(input));
+        } else {
+            println!("Part Two: {}", part2(input));
+        }
         let t2 = SystemTime::now();
 
         if show_time {
