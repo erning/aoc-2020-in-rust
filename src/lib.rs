@@ -22,6 +22,9 @@ pub mod day19;
 pub mod day20;
 pub mod day21;
 pub mod day22;
+pub mod day23;
+pub mod day24;
+pub mod day25;
 
 pub fn read_as_string(day: u8, filename: &str) -> String {
     let filename = format!("inputs/{:02}-{}.txt", day, filename);

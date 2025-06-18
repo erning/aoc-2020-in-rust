@@ -50,12 +50,14 @@ fn find_invalid_sum(nums: &[u64], len: usize) -> u64 {
 
 pub fn part_one(input: &str) -> u64 {
     let nums = parse_input(input);
-    find_invalid(&nums, 25)
+    let numbers = if nums.len() <= 20 { 5 } else { 25 };
+    find_invalid(&nums, numbers)
 }
 
 pub fn part_two(input: &str) -> u64 {
     let nums = parse_input(input);
-    find_invalid_sum(&nums, 25)
+    let numbers = if nums.len() <= 20 { 5 } else { 25 };
+    find_invalid_sum(&nums, numbers)
 }
 
 #[cfg(test)]
