@@ -1,3 +1,4 @@
+use std::collections::HashMap;
 use std::fmt::Debug;
 
 #[derive(Debug)]
@@ -6,10 +7,12 @@ enum Rule {
     S(Vec<Vec<usize>>), // Sequence [Sequence, Sequence, ...]
 }
 
-fn parse_input(input: &str) -> (Vec<Rule>, Vec<&str>) {
+type Rules = HashMap<usize, Rule>;
+
+fn parse_input(input: &str) -> (Rules, Vec<&str>) {
     let (p1, p2) = input.trim().split_once("\n\n").unwrap();
 
-    let mut rules: Vec<(usize, Rule)> = p1
+    let rules: Vec<(usize, Rule)> = p1
         .lines()
         .map(|s| {
             let (s1, s2) = s.split_once(": ").unwrap();
@@ -30,19 +33,19 @@ fn parse_input(input: &str) -> (Vec<Rule>, Vec<&str>) {
             (idx, rule)
         })
         .collect();
-    rules.sort_unstable_by_key(|&(id, _)| id);
-    let rules = rules.into_iter().map(|(_, rule)| rule).collect();
+    // rules.sort_unstable_by_key(|&(id, _)| id);
+    let rules = rules.into_iter().collect();
     let messages = p2.lines().collect();
     (rules, messages)
 }
 
 // Returns a Vec of possible suffixes after matching rule idx at the start of message
 fn match_rule<'a>(
-    rules: &'a [Rule],
+    rules: &Rules,
     idx: usize,
     message: &'a [char],
 ) -> Vec<&'a [char]> {
-    match &rules[idx] {
+    match &rules[&idx] {
         Rule::L(ch) => {
             if !message.is_empty() && &message[0] == ch {
                 vec![&message[1..]]
@@ -88,14 +91,8 @@ pub fn part_one(input: &str) -> usize {
 
 pub fn part_two(input: &str) -> usize {
     let (mut rules, messages) = parse_input(input);
-
-    assert!(rules.len() > 11);
-    // Patch rules 8 and 11 for part two (if they exist)
-    // 8: 42 | 42 8  =>  42+
-    // 11: 42 31 | 42 11 31  => n times 42 then n times 31, n >= 1
-
-    rules[8] = Rule::S(vec![vec![42], vec![42, 8]]);
-    rules[11] = Rule::S(vec![vec![42, 31], vec![42, 11, 31]]);
+    rules.insert(8, Rule::S(vec![vec![42], vec![42, 8]]));
+    rules.insert(11, Rule::S(vec![vec![42, 31], vec![42, 11, 31]]));
 
     messages
         .iter()
