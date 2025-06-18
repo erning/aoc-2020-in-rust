@@ -33,10 +33,9 @@ impl Tile {
     fn rotate(&mut self) {
         let size = self.data.len();
         let mut new_data = vec![String::new(); size];
-        for i in 0..size {
+        for (i, row) in new_data.iter_mut().enumerate() {
             for j in 0..size {
-                new_data[i]
-                    .push(self.data[size - 1 - j].chars().nth(i).unwrap());
+                row.push(self.data[size - 1 - j].chars().nth(i).unwrap());
             }
         }
         self.data = new_data;
@@ -155,7 +154,7 @@ pub fn part_one(input: &str) -> usize {
 
 /// Assemble the jigsaw puzzle into a complete image
 fn assemble_image(tiles: &[Tile]) -> Vec<String> {
-    let matches = find_edge_matches(&tiles);
+    let matches = find_edge_matches(tiles);
     let grid_size = (tiles.len() as f64).sqrt() as usize;
 
     // Find a corner to start with
@@ -199,15 +198,13 @@ fn assemble_image(tiles: &[Tile]) -> Vec<String> {
 
     // Combine tiles into final image (removing borders)
     let mut final_image = Vec::new();
-    for row in 0..grid_size {
+    for (_row, grid_row) in grid.iter().enumerate().take(grid_size) {
         let mut tile_rows = vec![Vec::new(); 8]; // 8x8 after removing borders
 
-        for col in 0..grid_size {
-            if let Some(tile) = &grid[row][col] {
-                let borderless = tile.remove_border();
-                for (i, line) in borderless.iter().enumerate() {
-                    tile_rows[i].push(line.clone());
-                }
+        for tile in grid_row.iter().take(grid_size).flatten() {
+            let borderless = tile.remove_border();
+            for (i, line) in borderless.iter().enumerate() {
+                tile_rows[i].push(line.clone());
             }
         }
 
@@ -222,7 +219,7 @@ fn assemble_image(tiles: &[Tile]) -> Vec<String> {
 fn solve_grid(
     grid: &mut Vec<Vec<Option<Tile>>>,
     tile_map: &HashMap<usize, Tile>,
-    matches: &HashMap<usize, HashSet<usize>>,
+    _matches: &HashMap<usize, HashSet<usize>>,
     used_tiles: &mut HashSet<usize>,
     row: usize,
     col: usize,
@@ -246,12 +243,12 @@ fn solve_grid(
 
         // Try each orientation of the tile
         for orientation in tile.all_orientations() {
-            if can_place_tile(&grid, &orientation, row, col) {
+            if can_place_tile(grid, &orientation, row, col) {
                 grid[row][col] = Some(orientation);
                 used_tiles.insert(tile_id);
 
                 if solve_grid(
-                    grid, tile_map, matches, used_tiles, next_row, next_col,
+                    grid, tile_map, _matches, used_tiles, next_row, next_col,
                     grid_size,
                 ) {
                     return true;
@@ -301,7 +298,7 @@ fn can_place_tile(
 
 /// Find sea monsters in the assembled image and return count of '#' not part of monsters
 fn find_sea_monsters(image: &[String]) -> usize {
-    let sea_monster = vec![
+    let sea_monster = [
         "                  # ",
         "#    ##    ##    ###",
         " #  #  #  #  #  #   ",
@@ -388,9 +385,9 @@ fn rotate_image(image: &[String]) -> Vec<String> {
     let cols = image[0].len();
     let mut rotated = vec![String::new(); cols];
 
-    for j in 0..cols {
+    for (j, rotated_row) in rotated.iter_mut().enumerate() {
         for i in (0..rows).rev() {
-            rotated[j].push(image[i].chars().nth(j).unwrap());
+            rotated_row.push(image[i].chars().nth(j).unwrap());
         }
     }
 
