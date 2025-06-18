@@ -5,6 +5,7 @@ fn parse_input(input: &str) -> Vec<&str> {
 fn decode(s: &str) -> u16 {
     let (mut a, mut b) = (0, (1 << s.len()) - 1);
     for ch in s.trim().chars() {
+        #[allow(clippy::manual_div_ceil)]
         let delta = (b - a + 1) / 2;
         match ch {
             'F' | 'L' => b -= delta,
