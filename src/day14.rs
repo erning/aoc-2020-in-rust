@@ -1,3 +1,31 @@
+//! Day 14: Docking Data
+//!
+//! ## Problem Description
+//!
+//! Part 1: Apply bitmask operations to memory values before storing them.
+//! Part 2: Apply bitmask operations to memory addresses, with floating bits creating
+//! multiple address variants.
+//!
+//! ## Solution Approach
+//!
+//! **Input Parsing**: Splits input into sections by "mask = " delimiter:
+//! - Each section starts with a bitmask (36 characters of 0, 1, X)
+//! - Followed by memory assignments in format "mem[address] = value"
+//!
+//! **Part 1 Strategy**: Value masking
+//! - Parse bitmask into two bitmasks: bm0 (for 0s) and bm1 (for 1s)
+//! - Apply masks: (value | bm1) & !bm0
+//! - bm1 forces 1s, bm0 forces 0s, X bits remain unchanged
+//!
+//! **Part 2 Strategy**: Address masking with floating bits
+//! - Parse bitmask to identify: fixed 1s (bm1), fixed 0s (bm0), and floating bits (X)
+//! - For each memory assignment, generate all possible addresses by setting floating bits
+//! - Uses recursive generation to handle all 2^n combinations for n floating bits
+//! - Stores value in all generated addresses
+//!
+//! **Bit Manipulation**: Uses bitwise operations for efficient mask application and
+//! recursive address generation for floating bits.
+
 use std::collections::HashMap;
 
 fn parse_input(input: &str) -> Vec<Vec<(u64, u64)>> {

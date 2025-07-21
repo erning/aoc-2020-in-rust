@@ -1,3 +1,35 @@
+//! Day 18: Operation Order
+//!
+//! ## Problem Description
+//!
+//! Part 1: Evaluate mathematical expressions with different operator precedence:
+//! - Addition and multiplication have equal precedence
+//! - Evaluate left-to-right regardless of operator type
+//!
+//! Part 2: Evaluate with modified precedence rules:
+//! - Addition has higher precedence than multiplication
+//! - Still evaluate left-to-right within same precedence level
+//!
+//! ## Solution Approach
+//!
+//! **Input Parsing**: Reads each line as a mathematical expression string.
+//!
+//! **Tokenization**: Converts expressions into tokens:
+//! - Numbers: single digit values (0-9)
+//! - Operators: '+', '*', '(', ')'
+//!
+//! **Part 1 Strategy**: Equal precedence evaluation
+//! - Uses Shunting-yard algorithm to convert to Reverse Polish Notation (RPN)
+//! - Standard precedence: all operators have equal priority
+//! - Evaluates RPN using stack-based calculation
+//!
+//! **Part 2 Strategy**: Modified precedence evaluation
+//! - Same RPN conversion but with modified precedence rules
+//! - Addition '+' has higher precedence than multiplication '*'
+//! - Still uses stack-based evaluation after conversion
+//!
+//! **Algorithm**: RPN conversion followed by stack-based evaluation for both parts.
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 enum Token {
     N(u64),

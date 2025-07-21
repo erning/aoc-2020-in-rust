@@ -1,3 +1,32 @@
+//! Day 13: Shuttle Search
+//!
+//! ## Problem Description
+//!
+//! Part 1: Find the earliest bus you can take to the airport and calculate the product
+//! of its ID and the minutes you need to wait.
+//!
+//! Part 2: Find the earliest timestamp where each bus departs at a specific offset
+//! from the timestamp (bus at index i departs at timestamp + i).
+//!
+//! ## Solution Approach
+//!
+//! **Input Parsing**: Splits input into:
+//! - Earliest departure time (first line)
+//! - List of bus IDs with 'x' values replaced by 0 (second line, comma-separated)
+//!
+//! **Part 1 Strategy**: Modular arithmetic
+//! - For each bus ID, calculate wait time: (ID - (earliest % ID)) % ID
+//! - Find bus with minimum wait time
+//! - Return bus ID × wait time
+//!
+//! **Part 2 Strategy**: Chinese Remainder Theorem via incremental approach
+//! - Uses iterative method to solve system of congruences
+//! - At each step, finds timestamp satisfying all constraints up to current bus
+//! - Uses LCM (step *= id) to maintain valid solutions across iterations
+//! - Efficiently finds the earliest timestamp satisfying all bus constraints
+//!
+//! **Mathematical Insight**: Solves t ≡ -i (mod id) for each bus at position i.
+
 fn parse_input(input: &str) -> (usize, Vec<usize>) {
     let lines: Vec<&str> = input.trim().lines().collect();
     (

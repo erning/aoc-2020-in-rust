@@ -1,5 +1,26 @@
-/// Day 25: Combo Breaker - Reverse-engineer cryptographic handshake
-/// Final day with only Part 1 - find encryption key from public keys
+//! Day 25: Combo Breaker - Cryptographic key exchange using modular exponentiation
+//!
+//! Problem Summary:
+//! A card and door use a cryptographic key exchange based on modular exponentiation:
+//! - Both use subject number 7 with secret loop sizes to generate public keys
+//! - Card has secret loop size, publishes public key
+//! - Door has secret loop size, publishes public key
+//! - Encryption key = transform(door_public_key, card_loop_size) = transform(card_public_key, door_loop_size)
+//!
+//! Part 1 - Find Encryption Key:
+//! - Given two public keys (card and door)
+//! - Find the loop size for one device by brute force
+//! - Use that loop size to transform the other device's public key
+//! - Return the resulting encryption key
+//!
+//! Solution Approach:
+//! - Use modular exponentiation: value = (value * subject) % 20201227
+//! - Brute force loop size finding by iterating from subject 7
+//! - Transform function applies modular exponentiation 'loop_size' times
+//! - The encryption key is symmetric: either transformation yields same result
+//!
+//! Note: Day 25 traditionally only has Part 1 as the final puzzle
+
 const MODULUS: u64 = 20201227;
 const SUBJECT_NUMBER: u64 = 7;
 

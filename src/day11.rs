@@ -1,3 +1,32 @@
+//! Day 11: Seating System
+//!
+//! ## Problem Description
+//!
+//! Part 1: Apply seating rules based on adjacent seats until stable, count occupied seats.
+//! Part 2: Apply seating rules based on visible seats in all directions until stable.
+//!
+//! ## Solution Approach
+//!
+//! **Input Parsing**: Converts the seating layout into a 2D grid of characters
+//! where 'L'=empty seat, '#'=occupied seat, '.'=floor space.
+//!
+//! **Part 1 Strategy**: Adjacent seat rules
+//! - Empty seat ('L') becomes occupied ('#') if no adjacent occupied seats
+//! - Occupied seat ('#') becomes empty ('L') if 4+ adjacent seats occupied
+//! - Adjacent = 8 immediate neighbors (including diagonals)
+//!
+//! **Part 2 Strategy**: Visible seat rules
+//! - Empty seat ('L') becomes occupied ('#') if no visible occupied seats
+//! - Occupied seat ('#') becomes empty ('L') if 5+ visible seats occupied
+//! - Visible = first seat in each of 8 directions (including diagonals)
+//!
+//! **Simulation**: Uses iterative approach:
+//! - Apply rules to entire grid simultaneously (using clone for state)
+//! - Continue until no changes occur (stable state)
+//! - Count total occupied seats in final configuration
+//!
+//! **Direction Handling**: 8-directional checking with ray casting for Part 2.
+
 const DIRS: [(i8, i8); 8] = [
     (-1, -1),
     (-1, 0),

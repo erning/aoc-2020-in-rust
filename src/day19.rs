@@ -1,3 +1,37 @@
+//! Day 19: Monster Messages
+//!
+//! ## Problem Description
+//!
+//! Part 1: Count how many messages completely match rule 0 using the given grammar rules.
+//! Part 2: Modify rules 8 and 11 to handle loops, then count valid messages.
+//!
+//! ## Solution Approach
+//!
+//! **Input Parsing**: Splits input into:
+//! - Rules: Grammar rules in format "id: rule" where rules can be literals or sequences
+//! - Messages: Lines of text to validate against the grammar
+//!
+//! **Part 1 Strategy**: Recursive pattern matching
+//! - Builds rules as a grammar tree with literals and sequences
+//! - Uses recursive descent parsing to match messages against rule 0
+//! - Returns all possible suffixes after matching a rule prefix
+//! - Message is valid if any suffix is empty (complete match)
+//!
+//! **Part 2 Strategy**: Grammar modification with loops
+//! - Rule 8: Replaced with "42 | 42 8" (one or more 42s)
+//! - Rule 11: Replaced with "42 31 | 42 11 31" (n 42s followed by n 31s)
+//! - Same recursive matching algorithm handles the modified grammar
+//!
+//! **Algorithm**: Recursive backtracking parser with memoization via function calls.
+//!
+//! ## Rule Types
+//! - **L(char)**: Literal character match
+//! - **S(sequences)**: Sequence of rule references with alternation (|)
+//!
+//! ## Grammar Format
+//! - Literals: "a" or "b"
+//! - Sequences: "1 2 3" or "1 2 | 3 4"
+
 use std::collections::HashMap;
 use std::fmt::Debug;
 

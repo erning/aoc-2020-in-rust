@@ -1,9 +1,32 @@
+//! Day 24: Lobby Layout - Hexagonal tile flipping and cellular automaton
+//!
+//! Problem Summary:
+//! A lobby floor has hexagonal tiles arranged in a hexagonal grid. Each tile can be
+//! black or white (starts white). Directions are given as paths from a reference tile,
+//! and each tile at the end of a path gets flipped (black ↔ white).
+//!
+//! Part 1 - Initial Configuration:
+//! - Parse directional instructions (e.g., "esenee" = east, south-east, north-east, east)
+//! - Follow each path from origin (0,0,0) to identify tiles to flip
+//! - Count total black tiles after all flips
+//!
+//! Part 2 - Cellular Automaton:
+//! - Apply Conway's Game of Life rules on hexagonal grid for 100 days
+//! - Rules:
+//!   - Black tile with 1-2 black neighbors stays black
+//!   - White tile with exactly 2 black neighbors becomes black
+//!   - All other tiles become/remain white
+//!
+//! Solution Approach:
+//! - Use cube coordinates (x,y,z) where x+y+z=0 for hexagonal grid representation
+//! - Directions: e(1,-1,0), w(-1,1,0), ne(1,0,-1), nw(0,1,-1), se(0,-1,1), sw(-1,0,1)
+//! - Store only black tiles in HashSet<HexCoord> for efficiency
+//! - For cellular automaton: count black neighbors for all potentially affected tiles
+//! - Parse directions using state machine for multi-character directions (ne, nw, se, sw)
+
 use std::collections::{HashMap, HashSet};
 
-/// Day 24: Lobby Layout - Hexagonal tile flipping and cellular automaton
-/// Part 1: Flip tiles based on directional instructions, count black tiles
-/// Part 2: Simulate 100 days of cellular automaton rules
-/// Hexagonal coordinate using cube coordinates (x, y, z) where x + y + z = 0
+// Hexagonal coordinate using cube coordinates (x, y, z) where x + y + z = 0
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 struct HexCoord {
     x: i32,

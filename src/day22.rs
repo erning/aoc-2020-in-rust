@@ -1,6 +1,35 @@
+//! Day 22: Crab Combat - Space card game between two players
+//!
+//! Problem Summary:
+//! Two players start with decks of cards (space cards with values). The game has two variants:
+//!
+//! Part 1 - Regular Combat:
+//! - Players draw top cards simultaneously
+//! - Higher card value wins both cards
+//! - Winner places their card first, then the losing card at bottom of their deck
+//! - Game ends when one player has all cards
+//! - Score = sum of (card_value * position_from_bottom), where bottom card = position 1
+//!
+//! Part 2 - Recursive Combat:
+//! - Same basic rules as regular combat, but with recursive sub-games
+//! - Before each round, check if this exact deck configuration has occurred before
+//! - If yes, Player 1 wins immediately (prevents infinite games)
+//! - After drawing cards, if both players have enough cards (>= their drawn card value),
+//!   the winner is determined by playing a recursive sub-game with:
+//!   - Player 1 gets sub-deck of their top N cards (where N = their drawn card value)
+//!   - Player 2 gets sub-deck of their top M cards (where M = their drawn card value)
+//! - Otherwise, higher card wins as normal
+//! - Recursive games can spawn deeper sub-games
+//! - Final score calculated same way as Part 1
+//!
+//! Solution Approach:
+//! - Parse input into two VecDeque<u32> for efficient front/back operations
+//! - Implement separate game engines for regular and recursive variants
+//! - Use HashSet for infinite game prevention in recursive mode
+//! - Calculate score by iterating deck in reverse order with positional multipliers
+
 use std::collections::{HashSet, VecDeque};
 
-/// Day 22: Crab Combat - Card game simulation with regular and recursive variants
 /// Parse the input into two player decks
 fn parse_decks(input: &str) -> (VecDeque<u32>, VecDeque<u32>) {
     let sections: Vec<&str> = input.trim().split("\n\n").collect();

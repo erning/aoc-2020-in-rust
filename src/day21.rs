@@ -1,3 +1,28 @@
+//! Day 21: Allergen Assessment
+//!
+//! ## Problem Description
+//!
+//! Part 1: Count how many times ingredients that cannot contain allergens appear across all foods.
+//! Part 2: Determine which ingredient contains which allergen and return a canonical list sorted by allergen name.
+//!
+//! ## Solution Approach
+//!
+//! **Input Parsing**: Parses each food line into:
+//! - Ingredients: Set of ingredient names (space-separated before "(contains")
+//! - Allergens: Set of allergen names (comma-separated after "contains")
+//!
+//! **Part 1 Strategy**: Constraint elimination
+//! - For each allergen, find ingredients that could potentially contain it by intersecting all ingredient sets from foods containing that allergen
+//! - Collect all ingredients that could contain any allergen
+//! - Count occurrences of ingredients that cannot contain any allergen
+//!
+//! **Part 2 Strategy**: Constraint solving via elimination
+//! - Uses process of elimination to determine exact allergen-to-ingredient mapping
+//! - Repeatedly finds allergens with only one possible ingredient and eliminates that ingredient from other allergen possibilities
+//! - Sorts allergens alphabetically and returns corresponding ingredients as comma-separated list
+//!
+//! **Algorithm**: Constraint satisfaction problem solved using iterative elimination with smallest-domain-first heuristic.
+
 use std::collections::{HashMap, HashSet};
 
 /// Represents a food item with its ingredients and known allergens

@@ -1,3 +1,33 @@
+//! Day 17: Conway Cubes
+//!
+//! ## Problem Description
+//!
+//! Part 1: Simulate Conway's Game of Life in 3D space for 6 cycles.
+//! Part 2: Simulate Conway's Game of Life in 4D space for 6 cycles.
+//!
+//! ## Solution Approach
+//!
+//! **Input Parsing**: Converts 2D input grid into initial cube positions,
+//! mapping '#' to active cubes at z=0 (Part 1) or z=w=0 (Part 2).
+//!
+//! **Part 1 Strategy**: 3D cellular automaton
+//! - Active cube stays active with 2-3 active neighbors
+//! - Inactive cube becomes active with exactly 3 active neighbors
+//! - Uses 3D coordinates (x,y,z) for cube positions
+//!
+//! **Part 2 Strategy**: 4D cellular automaton
+//! - Same rules as Part 1 but in 4D space (x,y,z,w)
+//! - Expands simulation bounds each cycle to include all possible neighbors
+//!
+//! **Simulation Algorithm**:
+//! - Uses HashSet to efficiently store only active cube positions
+//! - For each cycle, examines all positions within current bounds + 1
+//! - Counts active neighbors using nested loops over 3D/4D space
+//! - Applies Conway's rules to determine next state
+//!
+//! **Performance**: Efficient sparse representation using HashSet,
+//! only storing active cubes rather than entire grid.
+
 use std::collections::HashSet;
 
 fn parse_input(input: &str) -> Vec<Vec<char>> {

@@ -1,3 +1,34 @@
+//! Day 4: Passport Processing
+//!
+//! ## Problem Description
+//!
+//! Part 1: Count valid passports based on required fields presence.
+//! Part 2: Count valid passports based on field presence AND field value validation.
+//!
+//! Required fields: byr, iyr, eyr, hgt, hcl, ecl, pid (cid is optional)
+//!
+//! ## Solution Approach
+//!
+//! **Input Parsing**: Splits input by double newlines to separate passports,
+//! then parses each passport into a HashMap of field-value pairs.
+//!
+//! **Part 1 Strategy**: Field presence validation
+//! - Checks if all required fields (except cid) are present
+//! - Uses a predefined list of required field keys
+//!
+//! **Part 2 Strategy**: Field value validation
+//! - Applies all Part 1 validations first
+//! - Validates each field value according to specific rules:
+//!   - byr: 1920-2002 (birth year)
+//!   - iyr: 2010-2020 (issue year)
+//!   - eyr: 2020-2030 (expiration year)
+//!   - hgt: 150-193cm or 59-76in (height)
+//!   - hcl: # followed by 6 hex digits (hair color)
+//!   - ecl: one of [amb, blu, brn, gry, grn, hzl, oth] (eye color)
+//!   - pid: 9-digit number (passport ID)
+//!
+//! **Validation Logic**: Uses pattern matching for clean validation of each field type.
+
 use std::collections::HashMap;
 
 fn parse_input(input: &str) -> Vec<HashMap<&str, &str>> {

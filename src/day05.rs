@@ -1,3 +1,32 @@
+//! Day 5: Binary Boarding
+//!
+//! ## Problem Description
+//!
+//! Part 1: Find the highest seat ID on a boarding pass using binary space partitioning.
+//! Part 2: Find your seat ID which is missing from the list but has adjacent seats.
+//!
+//! ## Solution Approach
+//!
+//! **Input Parsing**: Reads each line as a boarding pass string (e.g., "FBFBBFFRLR").
+//!
+//! **Binary Space Partitioning**: The `decode` function uses binary search:
+//! - 'F'/'L' = take lower half (reduce upper bound)
+//! - 'B'/'R' = take upper half (increase lower bound)
+//! - First 7 chars: row (0-127), Last 3 chars: column (0-7)
+//! - Seat ID = row * 8 + column
+//!
+//! **Part 1 Strategy**: Find maximum seat ID
+//! - Decode all boarding passes to seat IDs
+//! - Return the maximum value
+//!
+//! **Part 2 Strategy**: Find missing seat ID
+//! - Decode all boarding passes and sort seat IDs
+//! - Find gap where seat ID+1 doesn't equal next seat ID
+//! - Return the missing seat ID (your seat)
+//!
+//! **Binary Search Logic**: Uses half-interval search to efficiently determine
+//! row/column from boarding pass characters.
+
 fn parse_input(input: &str) -> Vec<&str> {
     input.trim().lines().collect()
 }

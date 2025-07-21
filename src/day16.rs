@@ -1,3 +1,29 @@
+//! Day 16: Ticket Translation
+//!
+//! ## Problem Description
+//!
+//! Part 1: Find the sum of all invalid values in nearby tickets based on field rules.
+//! Part 2: Determine which fields are which on your ticket and multiply the departure values.
+//!
+//! ## Solution Approach
+//!
+//! **Input Parsing**: Parses three sections:
+//! - Field rules: name + valid ranges (e.g., "class: 1-3 or 5-7")
+//! - Your ticket: comma-separated values
+//! - Nearby tickets: list of comma-separated value tickets
+//!
+//! **Part 1 Strategy**: Invalid value identification
+//! - For each value in nearby tickets, check if it matches any field's valid ranges
+//! - Sum all values that don't match any field's constraints
+//!
+//! **Part 2 Strategy**: Field mapping via constraint satisfaction
+//! - Filter out invalid tickets using Part 1 criteria
+//! - For each ticket position, determine which fields could validly map to it
+//! - Use greedy algorithm: assign fields to positions with fewest valid options first
+//! - Extract departure-related fields from your ticket and multiply their values
+//!
+//! **Algorithm**: Uses binary heap for efficient constraint satisfaction with smallest-domain-first heuristic.
+
 use std::cmp::Reverse;
 use std::collections::BinaryHeap;
 

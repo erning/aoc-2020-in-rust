@@ -1,3 +1,37 @@
+//! Day 20: Jurassic Jigsaw
+//!
+//! ## Problem Description
+//!
+//! Part 1: Assemble a jigsaw puzzle from square tiles and find the product of corner tile IDs.
+//! Part 2: Find sea monsters in the assembled image and count '#' characters not part of any monster.
+//!
+//! ## Solution Approach
+//!
+//! **Input Parsing**: Parse input into tiles with:
+//! - Tile ID (from "Tile ####:")
+//! - 10x10 grid of '#' (active) and '.' (inactive) pixels
+//!
+//! **Part 1 Strategy**: Edge matching algorithm
+//! - Extract all 4 edges (top, right, bottom, left) from each tile
+//! - Consider both original and flipped versions of edges
+//! - Find tiles with exactly 2 matching neighbors (corners)
+//! - Return product of corner tile IDs
+//!
+//! **Part 2 Strategy**: Image assembly and pattern matching
+//! - Assemble tiles into complete image by matching edges
+//! - Remove borders from each tile (leaving 8x8 pixels per tile)
+//! - Search for sea monster pattern in all orientations (8 total: 4 rotations × 2 flips)
+//! - Count total '#' characters minus those part of sea monsters
+//!
+//! **Tile Operations**:
+//! - Rotate 90° clockwise: Transpose and reverse rows
+//! - Flip horizontal: Reverse each row
+//! - All orientations: 8 possible (4 rotations × 2 flips)
+//!
+//! **Sea Monster Pattern**:
+//! - 3-line pattern with specific '#' positions
+//! - Search across entire image in all orientations
+
 use std::collections::{HashMap, HashSet};
 
 /// Represents a square tile in the jigsaw puzzle

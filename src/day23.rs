@@ -1,7 +1,32 @@
+//! Day 23: Crab Cups - Circular cup shuffling game with two complexity levels
+//!
+//! Problem Summary:
+//! A circular arrangement of numbered cups where a "move" involves:
+//! 1. Current cup is the starting point
+//! 2. Pick up the next 3 cups clockwise
+//! 3. Find destination cup (current cup - 1, wrapping to max if needed)
+//! 4. Skip destination if it's one of the picked up cups
+//! 5. Place the 3 picked cups immediately clockwise of destination
+//! 6. New current cup is the one immediately clockwise of the previous current
+//!
+//! Part 1 - Simple Game:
+//! - Start with 9 cups in the order from input
+//! - Play 100 moves
+//! - Return the cup labels in order after cup 1 (excluding 1 itself)
+//!
+//! Part 2 - Large Scale Game:
+//! - Start with input cups followed by cups 10-1,000,000
+//! - Play 10,000,000 moves
+//! - Return the product of the two cups immediately clockwise of cup 1
+//!
+//! Solution Approach:
+//! - Part 1: Use VecDeque for straightforward implementation (acceptable for 100 moves)
+//! - Part 2: Use array-based linked list (next[i] = cup after cup i) for O(1) operations
+//! - Linked list approach allows handling 10M moves with 1M cups efficiently
+//! - Key insight: Array indexing is O(1) vs VecDeque's O(n) for insertions/removals
+
 use std::collections::VecDeque;
 
-/// Day 23: Crab Cups - Cup shuffling game with circular arrangement
-/// Part 1: 100 moves with 9 cups, Part 2: 10M moves with 1M cups
 /// Parse the input string into a vector of cup numbers
 fn parse_input(input: &str) -> Vec<u32> {
     input

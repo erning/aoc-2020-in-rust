@@ -1,3 +1,27 @@
+//! Day 9: Encoding Error
+//!
+//! ## Problem Description
+//!
+//! Part 1: Find the first number that is NOT the sum of any two of the previous N numbers.
+//! Part 2: Find a contiguous range that sums to the invalid number, then return
+//! the sum of the smallest and largest numbers in that range.
+//!
+//! ## Solution Approach
+//!
+//! **Input Parsing**: Converts input lines into a vector of unsigned 64-bit integers.
+//!
+//! **Part 1 Strategy**: XMAS cipher validation
+//! - Uses sliding window of previous N numbers (N=5 for example, N=25 for real input)
+//! - For each number, checks if it can be expressed as sum of any two distinct numbers
+//! - Returns the first number that fails this validation
+//!
+//! **Part 2 Strategy**: Contiguous sum search
+//! - Uses sliding window approach to find contiguous range summing to invalid number
+//! - Expands window when sum is too small, shrinks when sum is too large
+//! - Once found, returns sum of min and max values in the contiguous range
+//!
+//! **Window Algorithm**: Efficient O(n) sliding window technique to find contiguous sum.
+
 fn parse_input(input: &str) -> Vec<u64> {
     input.trim().lines().map(|s| s.parse().unwrap()).collect()
 }

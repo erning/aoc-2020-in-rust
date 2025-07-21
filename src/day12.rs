@@ -1,3 +1,29 @@
+//! Day 12: Rain Risk
+//!
+//! ## Problem Description
+//!
+//! Part 1: Navigate a ship using directional instructions and calculate Manhattan distance from start.
+//! Part 2: Navigate using waypoint-based movement and calculate Manhattan distance from start.
+//!
+//! ## Solution Approach
+//!
+//! **Input Parsing**: Converts each line into (action, value) tuples where:
+//! - Actions: N, S, E, W (move), L, R (turn), F (forward)
+//! - Values: distances or angles (90, 180, 270 degrees for turns)
+//!
+//! **Part 1 Strategy**: Direct navigation
+//! - Ship moves in cardinal directions or forward in current facing direction
+//! - Uses 4-direction array: [East, South, West, North] indexed by direction counter
+//! - Tracks position (x, y) and facing direction (0-3 representing ESWN)
+//!
+//! **Part 2 Strategy**: Waypoint navigation
+//! - Ship moves toward waypoint, waypoint moves relative to ship
+//! - Waypoint starts 10 units East, 1 unit North of ship
+//! - Rotation: uses coordinate transformation for 90-degree turns
+//! - Forward movement: moves ship toward waypoint multiple times
+//!
+//! **Coordinate System**: Uses standard grid with East=+x, North=-y for simplicity.
+
 fn parse_input(input: &str) -> Vec<(u8, i32)> {
     input
         .trim()

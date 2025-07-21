@@ -1,3 +1,31 @@
+//! Day 8: Handheld Halting
+//!
+//! ## Problem Description
+//!
+//! Part 1: Find the accumulator value before the program loops infinitely.
+//! Part 2: Fix the program by changing exactly one "jmp" to "nop" or "nop" to "jmp"
+//! so the program terminates normally, then return the accumulator value.
+//!
+//! ## Solution Approach
+//!
+//! **Input Parsing**: Converts each line into (operation, value) tuples where:
+//! - Operations: "acc" (accumulate), "jmp" (jump), "nop" (no operation)
+//! - Values: signed integers for jump offsets or accumulator changes
+//!
+//! **Part 1 Strategy**: Detect infinite loop
+//! - Execute instructions sequentially while tracking visited positions
+//! - Stop when hitting a previously visited instruction
+//! - Return accumulator value at loop detection point
+//!
+//! **Part 2 Strategy**: Brute-force repair
+//! - Identify all "jmp" and "nop" instructions as candidates for modification
+//! - Try changing each candidate one at a time
+//! - Test if modified program terminates successfully
+//! - Return accumulator value when program reaches end
+//!
+//! **Execution Model**: Uses Result type where Ok() = successful termination,
+//! Err() = infinite loop detected, with accumulator value as payload.
+
 fn parse_input(input: &str) -> Vec<(&str, i32)> {
     input
         .trim()

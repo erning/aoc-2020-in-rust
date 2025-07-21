@@ -1,3 +1,32 @@
+//! Day 15: Rambunctious Recitation
+//!
+//! ## Problem Description
+//!
+//! Part 1: Play the memory game starting with given numbers, find the 2020th number spoken.
+//! Part 2: Continue the game to find the 30,000,000th number spoken.
+//!
+//! ## Solution Approach
+//!
+//! **Input Parsing**: Parses comma-separated starting numbers into a vector of integers.
+//!
+//! **Game Rules**:
+//! - Start with given numbers in order
+//! - If last number was new, say 0
+//! - If last number was repeated, say the difference between current and previous turn
+//!
+//! **Part 1 Strategy**: Efficient memory-based calculation
+//! - Uses vector-based storage for O(1) lookups instead of HashMap
+//! - Tracks (previous_turn, current_turn) for each spoken number
+//! - Calculates 2020th number iteratively
+//!
+//! **Part 2 Strategy**: Same algorithm optimized for scale
+//! - Identical logic to Part 1 but extended to 30 million iterations
+//! - Vector storage ensures O(n) time complexity for n iterations
+//! - Memory-efficient approach handles large iteration counts
+//!
+//! **Performance**: Uses pre-allocated vector for near O(1) lookups, avoiding
+//! HashMap overhead for better cache locality and performance.
+
 fn parse_input(input: &str) -> Vec<usize> {
     input
         .trim()

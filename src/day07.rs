@@ -1,3 +1,29 @@
+//! Day 7: Handy Haversacks
+//!
+//! ## Problem Description
+//!
+//! Part 1: Count how many bag colors can eventually contain at least one "shiny gold" bag.
+//! Part 2: Count how many individual bags are required inside a single "shiny gold" bag.
+//!
+//! ## Solution Approach
+//!
+//! **Input Parsing**: Creates a directed graph where:
+//! - Nodes are bag colors (e.g., "shiny gold", "dark red")
+//! - Edges represent containment relationships with weights (bag counts)
+//! - Uses nested HashMap: outer map keys are container bags, inner maps store contained bags and their counts
+//!
+//! **Part 1 Strategy**: Reverse traversal (containment check)
+//! - Uses recursive depth-first search to check if any bag can eventually contain "shiny gold"
+//! - For each bag, checks direct containment or recursive containment through any contained bag
+//! - Counts all bags that can reach "shiny gold" (excluding "shiny gold" itself)
+//!
+//! **Part 2 Strategy**: Forward traversal (bag counting)
+//! - Uses recursive depth-first search to count total bags inside "shiny gold"
+//! - For each contained bag: count = quantity * (recursive count of bags inside it + 1)
+//! - Sums all individual bag counts required
+//!
+//! **Algorithm**: Recursive DFS with memoization implicit in function calls handles the tree-like structure efficiently.
+
 use std::collections::HashMap;
 
 fn parse_input(input: &str) -> HashMap<String, HashMap<String, usize>> {
