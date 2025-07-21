@@ -1,7 +1,8 @@
 # aoc-2020-in-rust
 
 ```text
-$ cargo run --release --
+$ docker run --rm -it -v $(pwd):/project -w /project rust \
+  cargo run --release --
 
 --- Day 1: Historian Hysteria ---
 Part One: 877971
