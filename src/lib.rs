@@ -27,7 +27,7 @@ pub mod day24;
 pub mod day25;
 
 pub fn read_as_string(day: u8, filename: &str) -> String {
-    let filename = format!("inputs/{:02}-{}.txt", day, filename);
+    let filename = format!("inputs/{day:02}-{filename}.txt");
     fs::read_to_string(filename).unwrap()
 }
 

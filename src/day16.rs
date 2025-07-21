@@ -180,17 +180,14 @@ fn example_part_two() {
         "5,14,9"
     );
 
-    let fields = determined_ticket_fields(&input);
+    let fields = determined_ticket_fields(input);
     assert!(fields
         .iter()
-        .find(|(n, v)| n == &"class" && v == &12)
-        .is_some());
+        .any(|(n, v)| n == &"class" && v == &12));
     assert!(fields
         .iter()
-        .find(|(n, v)| n == &"row" && v == &11)
-        .is_some());
+        .any(|(n, v)| n == &"row" && v == &11));
     assert!(fields
         .iter()
-        .find(|(n, v)| n == &"seat" && v == &13)
-        .is_some());
+        .any(|(n, v)| n == &"seat" && v == &13));
 }

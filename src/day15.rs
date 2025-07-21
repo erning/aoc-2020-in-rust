@@ -84,7 +84,7 @@ mod tests {
 
     #[test]
     fn more_examples() {
-        for (input, expected) in vec![
+        for (input, expected) in [
             ("1,3,2", 1),
             ("2,1,3", 10),
             ("1,2,3", 27),
@@ -98,7 +98,7 @@ mod tests {
 
     #[test]
     fn more_examples_part_two() {
-        for (input, expected) in vec![
+        for (input, expected) in [
             ("1,3,2", 2578),
             ("2,1,3", 3544142),
             ("1,2,3", 261214),

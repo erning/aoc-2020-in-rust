@@ -62,7 +62,7 @@ fn main() {
         let input = aoc::read_as_string(day as u8, filename);
         let input = input.as_str();
 
-        println!("--- Day {}: {} ---", day, title);
+        println!("--- Day {day}: {title} ---");
         let t0 = SystemTime::now();
         println!("Part One: {}", part1(input));
         let t1 = SystemTime::now();

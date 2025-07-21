@@ -39,7 +39,7 @@ fn decode(s: &str) -> u16 {
         match ch {
             'F' | 'L' => b -= delta,
             'B' | 'R' => a += delta,
-            _ => panic!("unknown char: {}", ch),
+            _ => panic!("unknown char: {ch}"),
         }
     }
     assert_eq!(a, b);

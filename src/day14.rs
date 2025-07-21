@@ -127,6 +127,6 @@ mod tests {
             "mask = 00000000000000000000000000000000X0XX\n",
             "mem[30] = 1\n"
         );
-        assert_eq!(part_two(input), 1 * 8 + 100 * 4);
+        assert_eq!(part_two(input), 8 + 100 * 4);
     }
 }

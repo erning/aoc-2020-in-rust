@@ -52,7 +52,7 @@ impl HexCoord {
             "nw" => (0, 1, -1),
             "se" => (0, -1, 1),
             "sw" => (-1, 0, 1),
-            _ => panic!("Invalid direction: {}", direction),
+            _ => panic!("Invalid direction: {direction}"),
         };
         Self::new(self.x + dx, self.y + dy, self.z + dz)
     }
@@ -86,13 +86,13 @@ fn parse_directions(line: &str) -> Vec<String> {
                             chars.next().unwrap()
                         ));
                     } else {
-                        panic!("Invalid direction starting with {}", ch);
+                        panic!("Invalid direction starting with {ch}");
                     }
                 } else {
-                    panic!("Incomplete direction starting with {}", ch);
+                    panic!("Incomplete direction starting with {ch}");
                 }
             }
-            _ => panic!("Invalid character in directions: {}", ch),
+            _ => panic!("Invalid character in directions: {ch}"),
         }
     }
 
