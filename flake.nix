@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
+    rust-overlay.url = "github:oxalica/rust-overlay";
   };
 
   outputs =
@@ -11,33 +12,26 @@
       self,
       nixpkgs,
       flake-utils,
+      rust-overlay,
     }:
     flake-utils.lib.eachDefaultSystem (
       system:
       let
-        pkgs = nixpkgs.legacyPackages.${system};
+        overlays = [ (import rust-overlay) ];
+        pkgs = import nixpkgs {
+          inherit system overlays;
+        };
       in
       {
         devShells.default = pkgs.mkShell {
           buildInputs = with pkgs; [
+            # rust-bin.stable."1.87.0".default
+            rust-bin.stable.latest.default
             cargo
             rustc
             clippy
             rustfmt
             rust-analyzer
-
-            # Additional development tools
-            cargo-watch
-            cargo-edit
-            cargo-audit
-
-            # Git and other useful tools
-            git
-            ripgrep
-            fd
-
-            # Optional: Editor support
-            nil # Nix language server
           ];
 
           shellHook = ''
